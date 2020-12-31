@@ -101,8 +101,8 @@ for lat, lng, town, reg in zip(df_town2['Latitude'], df_town2['Longitude'], df_t
 
 map_Quebec
 
-CLIENT_ID = '*****'
-CLIENT_SECRET = '*****'
+CLIENT_ID = '1PSLEJLHYJXOFEQ32O1JMAAWG4CNSKYO0MDQEJYKWT3X3ORF'
+CLIENT_SECRET = 'AVUN23QCQGKM0PBGEWTZ0PQKNKCBLYKIEJU52OGKGZG10OLA'
 VERSION='20180325'
 LIMIT=5000
 RADIUS=5000
@@ -152,8 +152,7 @@ def getNearbyVenues(names, latitudes, longitudes, radius=2000):
 
 """#### Let's get all the venues in the towns of Quebec"""
 
-Quebec_venues = getNearbyVenues(names=df_town2['Name'],
-                                   latitudes=df_town2['Latitude'],
+Quebec_venues = getNearbyVenues(names=df_town2['Name'],latitudes=df_town2['Latitude'],
                                    longitudes=df_town2['Longitude'])
 
 Quebec_venues
@@ -242,7 +241,7 @@ longitude=-72.565411
 map_clusters = folium.Map(location=[latitude, longitude], zoom_start=6)
 
 arg = np.arange(kclusters)
-rg = [i + x + (i*arg)**2 for i in range(kclusters)]
+rg = [i + arg + (i*arg)**2 for i in range(kclusters)]
 colors_array = cm.rainbow(np.linspace(0, 1, len(rg)))
 rainbow = [colors.rgb2hex(i) for i in colors_array]
 
@@ -270,7 +269,7 @@ cluster_2
 cluster_3=Quebec_merged[Quebec_merged.loc[:,"Cluster Labels"]==2.0].reset_index(drop=True)
 cluster_3
 
-"""### Let's analyze the two clusters"""
+"""### Let's analyze the three clusters"""
 
 cluster_1.groupby("1st Most Common Venue").count().sort_values(by="Neighborhood",ascending=False)
 
@@ -307,5 +306,7 @@ cluster_3.groupby("10th Most Common Venue").count().sort_values(by="Neighborhood
 
 """###### Farms and Bakery are among available places in cluster 3. Airport Terminal, Museum, Night Club and Hockey Arena are also some of the most common venues in Cluster 3.
 
-## Final Suggestion: Any investment other than Fast Food restaurant, Grocery Store and Coffee Shop is better, considering there's a market for it. Bus Station, Shopping Malls and Beach are lagging behind in the frequency. So investing in them would make a better sense as there's a market for it but the availability is lesser.
+## Final Suggestion: 
+
+Any investment other than Fast Food restaurant, Grocery Store and Coffee Shop is better, considering there's a market for it. Bus Station, Shopping Malls and Beach are lagging behind in the frequency. So investing in them would make a better sense as there's a market for it but the availability is lesser.
 """
